@@ -2,7 +2,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-//       stringSteepMartinTwo();
+       stringSteepMartinTwo();
        stringSteepMartin();
     }
 
@@ -21,18 +21,19 @@ public class Main {
         double value = 0.001;
         double steep = 0.1;
         double take = 0.6;
-        int cicle = 100;
+        int block = 100;
+        int start = 1;
 
         StringBuilder stringBuilder = new StringBuilder("BalanceRestBuy = 0.0001@V\nBalanceRestSell = ");
 
-        for (int i = 0; i < cicle; i++) {
-            stringBuilder.append(value);
-            if (i < cicle - 1) {
+        for (int i = 0; i < block; i++) {
+            stringBuilder.append(start / 1000.00);
+            if (i < block - 1) {
                 stringBuilder.append("*");
             } else {
                 stringBuilder.append("@V");
             }
-            value = value + 0.001;
+            start++;
         }
 
         stringBuilder.append("\nInterval = oneMin\n" +
@@ -42,9 +43,9 @@ public class Main {
                 "IsDirectionLong = True\n" +
                 "StepRepresentEnter = ");
 
-        for (int i = 0; i < cicle; i++) {
+        for (int i = 0; i < block; i++) {
             stringBuilder.append("0.3");
-            if (i < cicle - 1) {
+            if (i < block - 1) {
                 stringBuilder.append("*");
             } else {
                 stringBuilder.append("@P");
@@ -53,9 +54,9 @@ public class Main {
 
         stringBuilder.append("\nStepRepresentClose = ");
 
-        for (int i = 0; i < cicle; i++) {
+        for (int i = 0; i < block; i++) {
             stringBuilder.append("0.8");
-            if (i < cicle - 1) {
+            if (i < block - 1) {
                 stringBuilder.append("*");
             } else {
                 stringBuilder.append("@P");
@@ -70,15 +71,12 @@ public class Main {
         StringBuilder stringBuilder = new StringBuilder("AdditionalTrading1 = [");
         double value = 0.001;
         double steep = 0.1;
-        double plus = 0.10;
         double take = 0.6;
         int block = 100;
+        int start = 1;
 
         for (int i = 0; i < block; i++) {
-            String[] strings = ("" + steep).split("\\.");
-            String string = strings[0] + "." + strings[1].substring(0, strings[1].length() == 1 ? 1 : 2);
-
-            stringBuilder.append("\"").append(string)
+            stringBuilder.append("\"").append(start / 10.0)
                     .append("@P*").append(take)
                     .append("@P*").append(value)
                     .append("@V\"");
@@ -87,7 +85,7 @@ public class Main {
             } else {
                 stringBuilder.append("]");
             }
-            steep = Double.parseDouble(string) + plus;
+            start++;
         }
         System.out.println(stringBuilder.toString());
     }
