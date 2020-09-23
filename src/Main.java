@@ -2,8 +2,65 @@ public class Main {
 
 
     public static void main(String[] args) {
-       stringSteepMartinTwo();
-       stringSteepMartin();
+//       stringSteepMartinTwo();
+        stringSteepMartinFree();
+//       stringSteepMartin();
+
+    }
+
+
+
+    private static void stringSteepMartinFree() {
+        double value = 0.001;
+        double steep = 0.1;
+        double take = 0.6;
+        int block = 100;
+        int start = 1;
+        int count = 0;
+
+        StringBuilder stringBuilder = new StringBuilder("BalanceRestBuy = 0.0001@V\nBalanceRestSell = ");
+
+        for (int i = 0; i < block; i++) {
+            if (count % 10 == 0) {
+                start++;
+            }
+            stringBuilder.append(start / 1000.00);
+            if (i < block - 1) {
+                stringBuilder.append("*");
+            } else {
+                stringBuilder.append("@V");
+            }
+            count++;
+//            start++;
+        }
+
+        stringBuilder.append("\nInterval = oneMin\n" +
+                "FreqUpdate = 2000\n" +
+                "SellOnlyBought = False\n" +
+                "WriteToFile = True\n" +
+                "IsDirectionLong = True\n" +
+                "StepRepresentEnter = ");
+
+        for (int i = 0; i < block; i++) {
+            stringBuilder.append("0.2");
+            if (i < block - 1) {
+                stringBuilder.append("*");
+            } else {
+                stringBuilder.append("@P");
+            }
+        }
+
+        stringBuilder.append("\nStepRepresentClose = ");
+
+        for (int i = 0; i < block; i++) {
+            stringBuilder.append("0.7");
+            if (i < block - 1) {
+                stringBuilder.append("*");
+            } else {
+                stringBuilder.append("@P");
+            }
+        }
+        System.out.println(stringBuilder.toString());
     }
 
 
@@ -55,7 +112,7 @@ public class Main {
         stringBuilder.append("\nStepRepresentClose = ");
 
         for (int i = 0; i < block; i++) {
-            stringBuilder.append("0.8");
+            stringBuilder.append("0.7");
             if (i < block - 1) {
                 stringBuilder.append("*");
             } else {
